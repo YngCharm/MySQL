@@ -52,7 +52,8 @@ public class Starter {
                 i--;
             }
         }
-        System.out.println(list);
+        System.out.println("Удалить все строки где есть: " + data);
+        System.out.println("Новый лист: " + list);
     }
 
     private void updateListElement(String request) {
@@ -71,17 +72,24 @@ public class Starter {
                 data.add(word.trim());
             }
         }
-        String key = data.get(data.size()-1);
-        String value = data.get(data.size()-2);
+        String key = data.get(data.size()-2);
+        String value = data.get(data.size()-1);
         data.remove(key);
         data.remove(value);
 
+        System.out.println("Там где содержится: " + key + " " + value + "\n" + "Вы хотите обновить: " + data);
+
+
         for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).containsKey(key) && list.get(i).containsValue(value)){
-
-
+            if (list.get(i).containsValue(value) && list.get(i).containsKey(key)) {
+                for (int j = 0; j < data.size() - 1; j++) {
+                    list.get(i).remove(data.get(j));
+                    list.get(i).remove(data.get(j+1));
+                    list.get(i).put(data.get(j), data.get(j+1));
+                }
             }
         }
+        System.out.println("Обвновлённый лист: " + "\n");
     }
 
     private void insertListElement(String request) {
@@ -114,8 +122,7 @@ public class Starter {
             }
         }
         list.add(row);
-        System.out.println(row);
         System.out.println("Вы добавили в таблицу: " + row);
-        System.out.println(list + "лист до удаления");
+        System.out.println("Новый лсит: " + "\n" + list);
     }
 }
